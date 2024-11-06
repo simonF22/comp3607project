@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.FileUtils;
-
 public class JavaEvaluator {
 
     private Path studentDirectory;
@@ -24,11 +22,12 @@ public class JavaEvaluator {
         File dir = new File(studentDirectory.toString());
 		String[] extensions = new String[] { "java" };
 
-        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, true);
+        /*List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, true);
         
         for (File file : files) {
             try {
-                String className = file.getName().replaceAll(".class", "");
+                String className = file.getName().replaceAll(".java", "");
+
                 Class<?> c = Class.forName(className);
                 classInstances.add(c);    
                 System.out.println("Inspecting class: " + c.getName());
@@ -38,9 +37,7 @@ public class JavaEvaluator {
             } catch (Exception e) {
                 System.err.println("An error occurred: " + e.getMessage());
             }
-        }
+        }*/
     }
-    
-
 
 }

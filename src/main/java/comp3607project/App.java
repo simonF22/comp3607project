@@ -24,8 +24,9 @@ public class App {
             return;
         }
         
-        Path outputDirectory = Paths.get(System.getProperty("user.dir"), "src", "submissions");
-        
+        //Path outputDirectory = Paths.get(System.getProperty("user.dir"), "src", "submissions");
+        Path outputDirectory = zipFilePath.getParent().resolve("Submissions");
+
         zipHandler.setOutputDirectory(outputDirectory);
         zipHandler.extractZipFile(zipFilePath);
 
