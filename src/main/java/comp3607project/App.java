@@ -12,6 +12,7 @@ public class App {
 
         ZipHandler zipHandler = new ZipHandler();
         Scanner scanner = new Scanner(System.in);
+        JavaEvaluator evaluator = new JavaEvaluator();
 
         System.out.print("Enter the path to the ZIP file containing student submissions: ");
         String zipFileAddressText = scanner.nextLine();
@@ -27,5 +28,16 @@ public class App {
         
         zipHandler.setOutputDirectory(outputDirectory);
         zipHandler.extractZipFile(zipFilePath);
+
+        try (Stream<Path> studentDirs = Files.list(outputDirectory)) {
+            studentDirs.filter(Files::isDirectory)
+                       .forEach(studentDir -> {
+                           System.out.println("Processing directory: " + studentDir.getFileName());
+                           evaluator.setStudentDirectory(studentDir);
+                           evaluator.inspect();
+                       });
+        } catch (IOException e) {
+            System.err.println("An error occurred while listing directories: " + e.getMessage());
+        }
     }    
 }
