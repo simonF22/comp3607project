@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 public class App {
     public static void main(String[] args) {
 
-        ZipHandler zipHandler = new ZipHandler();
         Scanner scanner = new Scanner(System.in);
+        ZipHandler zipHandler = new ZipHandler();
         JavaEvaluator evaluator = new JavaEvaluator();
 
         System.out.print("Enter the path to the ZIP file containing student submissions: ");
@@ -24,8 +24,8 @@ public class App {
             return;
         }
         
-        //Path outputDirectory = Paths.get(System.getProperty("user.dir"), "src", "submissions");
-        Path outputDirectory = zipFilePath.getParent().resolve("Submissions");
+        Path outputDirectory = Paths.get(System.getProperty("user.dir"), "src","main","java","comp3607project", "submissions");
+        //Path outputDirectory = zipFilePath.getParent().resolve(zipFilePath);
 
         zipHandler.setOutputDirectory(outputDirectory);
         zipHandler.extractZipFile(zipFilePath);
@@ -34,11 +34,21 @@ public class App {
             studentDirs.filter(Files::isDirectory)
                        .forEach(studentDir -> {
                            System.out.println("Processing directory: " + studentDir.getFileName());
+                           zipHandler.appendPackageToJavaFiles(studentDir);
+                       });
+        } catch (IOException e) {
+            System.err.println("An error occurred while listing directories: " + e.getMessage());
+        }
+
+        /*try (Stream<Path> studentDirs = Files.list(outputDirectory)) {
+            studentDirs.filter(Files::isDirectory)
+                       .forEach(studentDir -> {
+                           System.out.println("Processing directory: " + studentDir.getFileName());
                            evaluator.setStudentDirectory(studentDir);
                            evaluator.inspect();
                        });
         } catch (IOException e) {
             System.err.println("An error occurred while listing directories: " + e.getMessage());
-        }
+        }*/
     }    
 }
