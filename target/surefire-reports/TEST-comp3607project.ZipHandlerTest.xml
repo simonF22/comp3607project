@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="comp3607project.AppTest" time="0.016" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="comp3607project.ZipHandlerTest" time="0.012" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,12 +59,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testFullApplicationWorkflow" classname="comp3607project.AppTest" time="0.008">
-    <error message="Cannot invoke &quot;java.nio.file.Path.resolve(String)&quot; because &quot;this.studentDirectory&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.resolve(String)" because "this.studentDirectory" is null
-	at comp3607project.AppTest.testFullApplicationWorkflow(AppTest.java:50)
-</error>
-    <system-out><![CDATA[Starting evaluation of: comp3607project.SampleStudent
-Completed evaluation of comp3607project.SampleStudent with score: 25
-]]></system-out>
-  </testcase>
+  <testcase name="testExtractZipFile" classname="comp3607project.ZipHandlerTest" time="0"/>
 </testsuite>

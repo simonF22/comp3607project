@@ -1,54 +1,32 @@
 package comp3607project;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
+        // Define paths
+        Path zipFilePath = Path.of("submissions.zip"); // Path to ZIP file containing student submissions
+        Path outputDirectory = Path.of("extractedSubmissions"); // Directory to extract files
 
-        Scanner scanner = new Scanner(System.in);
+        // Step 1: Extract the ZIP file
         ZipHandler zipHandler = new ZipHandler();
-        JavaEvaluator evaluator = new JavaEvaluator();
-
-        System.out.print("Enter the path to the ZIP file containing student submissions: ");
-        String zipFileAddressText = scanner.nextLine();
-        Path zipFilePath = Paths.get(zipFileAddressText);
-        scanner.close();
-
-        if (!Files.exists(zipFilePath) || !zipFilePath.toString().endsWith(".zip")) {
-            System.err.println("Invalid file path. Please ensure the file exists and is a ZIP file.");
-            return;
-        }
-        
-        Path outputDirectory = Paths.get(System.getProperty("user.dir"), "src","main","java","comp3607project", "submissions");
-        //Path outputDirectory = zipFilePath.getParent().resolve(zipFilePath);
-
         zipHandler.setOutputDirectory(outputDirectory);
         zipHandler.extractZipFile(zipFilePath);
 
-        try (Stream<Path> studentDirs = Files.list(outputDirectory)) {
-            studentDirs.filter(Files::isDirectory)
-                       .forEach(studentDir -> {
-                           System.out.println("Processing directory: " + studentDir.getFileName());
-                           zipHandler.appendPackageToJavaFiles(studentDir);
-                       });
-        } catch (IOException e) {
-            System.err.println("An error occurred while listing directories: " + e.getMessage());
-        }
+        // Step 2: Initialize Evaluator
+        JavaEvaluator evaluator = new JavaEvaluator();
+        evaluator.addObserver(new ConsoleLoggerObserver());
 
-        /*try (Stream<Path> studentDirs = Files.list(outputDirectory)) {
-            studentDirs.filter(Files::isDirectory)
-                       .forEach(studentDir -> {
-                           System.out.println("Processing directory: " + studentDir.getFileName());
-                           evaluator.setStudentDirectory(studentDir);
-                           evaluator.inspect();
-                       });
-        } catch (IOException e) {
-            System.err.println("An error occurred while listing directories: " + e.getMessage());
-        }*/
-    }    
+        // Step 3: Collect Java classes from extracted files (use real classes if dynamically loaded)
+        List<Class<?>> mockClasses = new ArrayList<>();
+        mockClasses.add(String.class); // Placeholder; replace with actual classes if possible
+
+        // Step 4: Evaluate submissions and generate report
+        String studentId = "12345"; // Example student ID
+        evaluator.inspect(mockClasses, studentId);
+
+        System.out.println("Evaluation complete for student " + studentId);
+    }
 }

@@ -1,3 +1,12 @@
-comp3607project\App.class
+comp3607project\ConsoleLoggerObserver.class
 comp3607project\JavaEvaluator.class
+comp3607project\ReportGenerator.class
+comp3607project\EvaluationStrategy.class
+comp3607project\App.class
+comp3607project\InheritanceStrategy.class
+comp3607project\StructureStrategy.class
+comp3607project\NamingConventionStrategy.class
+comp3607project\SampleStudent.class
 comp3607project\ZipHandler.class
+comp3607project\ScoreCalculator.class
+comp3607project\EvaluationObserver.class

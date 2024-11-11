@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: comp3607project.ScoreCalculatorTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in comp3607project.ScoreCalculatorTest
+testCalculateScoreWithWeights(comp3607project.ScoreCalculatorTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<70> but was:<0>
+	at comp3607project.ScoreCalculatorTest.testCalculateScoreWithWeights(ScoreCalculatorTest.java:30)
+
+testCalculateScoreWithAllPasses(comp3607project.ScoreCalculatorTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<100> but was:<0>
+	at comp3607project.ScoreCalculatorTest.testCalculateScoreWithAllPasses(ScoreCalculatorTest.java:71)
+
