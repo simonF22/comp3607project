@@ -21,7 +21,7 @@ public class JavaEvaluatorTest {
         assertFalse("The report file should not exist before evaluation", Files.exists(reportPath));
 
         // Add classes to mock evaluation
-        evaluator.inspect(new ArrayList<>(), studentId);
+        evaluator.inspect(new ArrayList<>(), studentId, null);
 
         // Ensure the report gets generated
         assertTrue("The report file was not generated", Files.exists(reportPath));

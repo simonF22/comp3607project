@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: comp3607project.StructureStrategyTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.021 s <<< FAILURE! - in comp3607project.StructureStrategyTest
-testStructure(comp3607project.StructureStrategyTest)  Time elapsed: 0 s  <<< FAILURE!
-java.lang.AssertionError: Feedback should indicate structural issues if any
-	at comp3607project.StructureStrategyTest.testStructure(StructureStrategyTest.java:20)
-

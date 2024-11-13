@@ -10,9 +10,9 @@ import org.junit.runners.Suite;
     JavaEvaluatorTest.class,
     ScoreCalculatorTest.class,
     ReportGeneratorTest.class,
-    InheritanceStrategyTest.class,
-    NamingConventionStrategyTest.class,
-    StructureStrategyTest.class
+    ChatBotStrategyTest.class,
+    ChatBotPlatformStrategyTest.class,
+    ChatBotGeneratorStrategyTest.class
     
 })
 public class AllTests {

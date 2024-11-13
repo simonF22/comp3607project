@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: comp3607project.AppTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in comp3607project.AppTest
-testFullApplicationWorkflow(comp3607project.AppTest)  Time elapsed: 0.008 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.resolve(String)" because "this.studentDirectory" is null
-	at comp3607project.AppTest.testFullApplicationWorkflow(AppTest.java:50)
-

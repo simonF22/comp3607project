@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class ReportGeneratorTest {
         feedbackMap.put("Structure", "Method should have a void return type.");
 
         // Call generateReport with all required arguments
-        reportGenerator.generateReport(studentId, testResults, feedbackMap, reportPath);
+        reportGenerator.generateReport(studentId, testResults, feedbackMap, "",reportPath);
 
         assertTrue(Files.exists(reportPath));
         

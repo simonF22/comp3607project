@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: comp3607project.JavaEvaluatorTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! - in comp3607project.JavaEvaluatorTest
-testEvaluationProcess(comp3607project.JavaEvaluatorTest)  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.resolve(String)" because "this.studentDirectory" is null
-	at comp3607project.JavaEvaluatorTest.testEvaluationProcess(JavaEvaluatorTest.java:24)
-

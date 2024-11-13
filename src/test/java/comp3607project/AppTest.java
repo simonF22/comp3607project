@@ -47,7 +47,7 @@ public class AppTest {
         List<Class<?>> mockClasses = new ArrayList<>();
         mockClasses.add(SampleStudent.class);
 
-        evaluator.inspect(mockClasses, studentId);
+        evaluator.inspect(mockClasses, studentId, null);
         assertTrue(Files.exists(reportPath));
 
         String reportContent = Files.readString(reportPath);

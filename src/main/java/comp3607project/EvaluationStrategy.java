@@ -1,7 +1,10 @@
 package comp3607project;
 
+import java.util.Map;
+
 public interface EvaluationStrategy {
-    int evaluate(Class<?> clazz);
-    String getFeedback(); // Add this method to match the strategy implementations
+    void evaluate(Class<?> clazz, Map<String, Integer> tests, Map<String, String> feedback);
+    Map<String, String> getFeedback(); 
+    Map<String, Integer> getTests();
 }
 

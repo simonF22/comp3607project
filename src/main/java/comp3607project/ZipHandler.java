@@ -90,7 +90,7 @@ public class ZipHandler {
             }
 
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
-                bw.write("package comp3607project.submissions." + studentDirectory.getFileName() + ";");
+                bw.write("package comp3607project.extractedSubmissions." + studentDirectory.getFileName() + ";");
                 bw.newLine();
                 bw.write(contents);
             } catch (IOException e) {

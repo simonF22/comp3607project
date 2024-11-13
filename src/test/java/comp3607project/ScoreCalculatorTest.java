@@ -14,9 +14,9 @@ public class ScoreCalculatorTest {
 
         // Simulate test results with pass/fail (1 for pass, 0 for fail)
         Map<String, Integer> testResults = new HashMap<>();
-        testResults.put("NamingConvention", 1);  // Passed (20% weight)
-        testResults.put("Structure", 0);         // Failed (30% weight)
-        testResults.put("Inheritance", 1);       // Passed (50% weight)
+        testResults.put("test1", 5);
+        testResults.put("test2", 4);
+        testResults.put("test3", 2); 
 
         // Expected score calculation:
         // NamingConvention: 1 * 20% = 20

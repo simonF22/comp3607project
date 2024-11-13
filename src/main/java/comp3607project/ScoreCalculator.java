@@ -19,8 +19,7 @@ public class ScoreCalculator {
         for (Map.Entry<String, Integer> entry : testResults.entrySet()) {
             String testName = entry.getKey();
             int score = entry.getValue();
-            int weight = weights.getOrDefault(testName, 0);
-            totalScore += (score * weight) / 100;
+            totalScore += (score);
         }
 
         return totalScore;
