@@ -1,18 +1,28 @@
 package comp3607project;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 
-        ReportGenerator reportGenerator = new ReportGenerator();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the path to the ZIP file containing student submissions: ");
+        String zipFileAddressText = scanner.nextLine();
+        Path zipFilePath = Paths.get(zipFileAddressText);
+        scanner.close();
+        if (!Files.exists(zipFilePath) || !zipFilePath.toString().endsWith(".zip")) {
+            System.err.println("Invalid file path. Please ensure the file exists and is a ZIP file.");
+            return;
+        }
 
-        // Define paths
-        Path zipFilePath = Path.of("submissions.zip"); // Path to ZIP file containing student submissions
-        //Path outputDirectory = Path.of("extractedSubmissions"); // Directory to extract files
+        // Define path of extracted submissions
         Path outputDirectory = Path.of("src", "main", "java", "comp3607project", "extractedSubmissions");
 
   
@@ -23,7 +33,7 @@ public class App {
  
         // Iterate over each student submission directory within the extracted submissions directory 
         // and append package name to java files only
-        try {
+        /*try {
             Files.list(outputDirectory).filter(Files::isDirectory).forEach(subDirectory -> {
                 Path studentSubmissionDirectory = subDirectory;
                 zipHandler.appendPackageToJavaFiles(studentSubmissionDirectory);
@@ -31,7 +41,7 @@ public class App {
         } catch (IOException e) {
             System.out.println("Error in appending package name to java files");
             e.printStackTrace();
-        }
+        }*/
 
 
         // Step 2: Initialize Evaluator
@@ -39,6 +49,7 @@ public class App {
         evaluator.addObserver(new ConsoleLoggerObserver());
 
         // Step 3: Collect Java classes from extracted files..evaluation and generate report
+        ReportGenerator reportGenerator = new ReportGenerator();
         try {
             Files.list(outputDirectory)
                  .filter(Files::isDirectory) // Filter to ensure only directories
@@ -49,10 +60,10 @@ public class App {
                         if (studentID != null) {
                             System.out.println("Submission name format is valid. Student ID: " + subDirectoryName);
                             try {
-                                // Collect all .java files within the current subfolder
+                                // Collect all .class files within the current subfolder
                                 Files.walk(subDirectory)
-                                     .filter(Files::isRegularFile) // Ensure it's a file
-                                     .filter(file -> file.toString().endsWith(".class")) // Only .java files
+                                     .filter(Files::isRegularFile)
+                                     .filter(file -> file.toString().endsWith(".class"))
                                      .forEach(file -> {
                                        try {
                                            ArrayList<Class<?>> classInstances = new ArrayList<>();
@@ -95,5 +106,4 @@ public class App {
         }
         return null;
     }
-
 }

@@ -25,6 +25,7 @@ public class JavaEvaluator {
     private ReportGenerator reportGenerator = new ReportGenerator();
     @SuppressWarnings("FieldMayBeFinal")
     private ScoreCalculator scoreCalculator = new ScoreCalculator();
+    private PDFGenerator pdfGenerator = new PDFGenerator();
 
     public JavaEvaluator() {
         tests = new HashMap<>();
@@ -125,7 +126,9 @@ public class JavaEvaluator {
 
         int finalScore = scoreCalculator.calculateScore(tests);
         System.out.println(finalScore);
-        reportGenerator.generateReport(studentID, tests, feedback, "", subDirectory);
+        //reportGenerator.generateReport(studentID, tests, feedback, "", Path.of("src", "main", "java", "comp3607project", "Reports", "Report_" + studentID + ".txt"));
+        //reportGenerator.generateReport(studentID, tests, feedback, "", subDirectory.resolve("Report_" + studentID + ".txt"));
+        pdfGenerator.generateReport(studentID, tests, feedback, "", subDirectory.resolve("Report_" + studentID + ".pdf"));
     }
 
     public List<EvaluationObserver> getObservers() {

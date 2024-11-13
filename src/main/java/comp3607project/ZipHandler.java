@@ -39,6 +39,15 @@ public class ZipHandler {
 
         // Process any nested ZIP files
         processNestedZipFiles();
+        try {
+            Files.list(outputDirectory).filter(Files::isDirectory).forEach(subDirectory -> {
+                Path studentSubmissionDirectory = subDirectory;
+                appendPackageToJavaFiles(studentSubmissionDirectory);
+            });
+        } catch (IOException e) {
+            System.out.println("Error in appending package name to java files");
+            e.printStackTrace();
+        }
     }
 
     // Helper method to process nested ZIP files
