@@ -14,9 +14,9 @@ public class ScoreCalculatorTest {
 
         // Simulate test results with pass/fail (1 for pass, 0 for fail)
         Map<String, Integer> testResults = new HashMap<>();
-        testResults.put("test1", 5);
-        testResults.put("test2", 4);
-        testResults.put("test3", 2); 
+        testResults.put("test1", 30);
+        testResults.put("test2", 20);
+        testResults.put("test3", 20); 
 
         // Expected score calculation:
         // NamingConvention: 1 * 20% = 20
