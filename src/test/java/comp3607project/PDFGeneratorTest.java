@@ -11,17 +11,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReportGeneratorTest {
+public class PDFGeneratorTest {
 
-    private ReportGenerator reportGenerator;
-    @SuppressWarnings("FieldMayBeFinal")
-    private String studentId = "12345";
+    private PDFGenerator pdfGenerator;
+    private String[] studentInfo;
+
+    {
+        studentInfo = new String[3];
+        studentInfo[0] = "FirstName";
+        studentInfo[1] = "LastName";
+        studentInfo[2] = "816000000";
+        studentInfo[3] = "A1";
+    }
+
     private Path reportPath;
+    private int totalScore = 50;
 
     @Before
     public void setUp() {
-        reportGenerator = new ReportGenerator();
-        reportPath = Path.of("Report_" + studentId + ".txt");
+        pdfGenerator = new PDFGenerator();
+        reportPath = Path.of("Report.pdf");
     }
 
     @After
@@ -41,19 +50,19 @@ public class ReportGeneratorTest {
         feedbackMap.put("Structure", "Method should have a void return type.");
 
         // Call generateReport with all required arguments
-        reportGenerator.generateReport(studentId, testResults, feedbackMap, "",reportPath);
+        pdfGenerator.generateReport(studentInfo, totalScore, testResults, feedbackMap, "",reportPath);
 
         assertTrue(Files.exists(reportPath));
         
         String content = Files.readString(reportPath);
-        assertTrue(content.contains("Student ID: " + studentId));
+        assertTrue(content.contains("Student ID: " + studentInfo));
         assertTrue(content.contains("NamingConvention: 10"));
         assertTrue(content.contains("Structure: 15"));
         assertTrue(content.contains("Feedback"));  // Verify that feedback is included
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String[] getStudentInfo() {
+        return studentInfo;
     }
 }
 

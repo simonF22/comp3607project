@@ -1,8 +1,6 @@
 package comp3607project;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +10,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
+        // Step 1: Get path of submission zip
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the path to the ZIP file containing student submissions: ");
         String zipFileAddressText = scanner.nextLine();
@@ -30,35 +29,22 @@ public class App {
         ZipHandler zipHandler = new ZipHandler();
         zipHandler.setOutputDirectory(outputDirectory);
         zipHandler.extractZipFile(zipFilePath);
- 
-        // Iterate over each student submission directory within the extracted submissions directory 
-        // and append package name to java files only
-        /*try {
-            Files.list(outputDirectory).filter(Files::isDirectory).forEach(subDirectory -> {
-                Path studentSubmissionDirectory = subDirectory;
-                zipHandler.appendPackageToJavaFiles(studentSubmissionDirectory);
-            });
-        } catch (IOException e) {
-            System.out.println("Error in appending package name to java files");
-            e.printStackTrace();
-        }*/
-
 
         // Step 2: Initialize Evaluator
         JavaEvaluator evaluator = new JavaEvaluator();
         evaluator.addObserver(new ConsoleLoggerObserver());
 
         // Step 3: Collect Java classes from extracted files..evaluation and generate report
-        ReportGenerator reportGenerator = new ReportGenerator();
+        PDFGenerator pdfGenerator = new PDFGenerator();
         try {
             Files.list(outputDirectory)
                  .filter(Files::isDirectory) // Filter to ensure only directories
                  .forEach(subDirectory -> {
                     try {
                         String subDirectoryName = subDirectory.getFileName().toString();
-                        String studentID = extractStudentId(subDirectoryName);
-                        if (studentID != null) {
-                            System.out.println("Submission name format is valid. Student ID: " + subDirectoryName);
+                        String[] studentInfo = extractStudentInfo(subDirectoryName);
+                        if (studentInfo != null) {
+                            System.out.println("Submission - " + subDirectoryName + " - name format is valid");
                             try {
                                 // Collect all .class files within the current subfolder
                                 Files.walk(subDirectory)
@@ -72,8 +58,9 @@ public class App {
                                            // Load the class dynamically
                                            Class<?> clazz = Class.forName(className);
                                            classInstances.add(clazz);
-                                           classInstances.forEach(System.out::println);
-                                           evaluator.inspect(classInstances, studentID, subDirectory);
+                                           //classInstances.forEach(System.out::println);
+                                           classInstances.forEach(c -> System.out.println(c.getSimpleName()));
+                                           evaluator.inspect(classInstances, studentInfo, subDirectory);
                                        } catch (ClassNotFoundException e) {
                                            System.err.println("Class not found: " + e.getMessage());
                                        }
@@ -83,8 +70,9 @@ public class App {
                                 e.printStackTrace();
                             }
                         } else {
-                            reportGenerator.generateReport(studentID, null, null, "Submission name format is INVALID", subDirectory );
-                            System.err.println("Submission name format is INVALID. " + subDirectoryName);
+                            // Generates a report for a submission that did not meet submission name convention
+                            pdfGenerator.generateInvalidReport("Submission name format is INVALID", subDirectory.resolve("Report.pdf") );
+                            System.out.println("Submission - " + subDirectoryName + " - name format is INVALID");
                         }
                     }catch (Exception e) {
                          System.err.println("Error processing subfolder: " + subDirectory);
@@ -96,13 +84,20 @@ public class App {
         }
     }
 
-    private static String extractStudentId(String folderName) {
+
+    // Extracts info from a submission with valid name convention (first name, last name, id, assignment)
+    private static String[] extractStudentInfo(String folderName) {
         String[] parts = folderName.split("_");
-        if (parts.length >= 3) {
+        
+        if (parts.length == 4) {
+            String firstName = parts[0];
+            String secondName = parts[1];
             String studentId = parts[2];
+            String assignmentCode = parts[3];
+
             if (studentId.matches("\\d{9}")) {
-                return studentId;
-            } 
+                return new String[] { firstName, secondName, studentId, assignmentCode };
+            }
         }
         return null;
     }

@@ -16,6 +16,15 @@ public class AppTest {
     private Path reportPath;
     @SuppressWarnings("FieldMayBeFinal")
     private String studentId = "12345";
+    private String[] studentInfo;
+
+    {
+        studentInfo = new String[3];
+        studentInfo[0] = "FirstName";
+        studentInfo[1] = "LastName";
+        studentInfo[2] = "816000000";
+        studentInfo[3] = "A1";
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -47,7 +56,7 @@ public class AppTest {
         List<Class<?>> mockClasses = new ArrayList<>();
         mockClasses.add(SampleStudent.class);
 
-        evaluator.inspect(mockClasses, studentId, null);
+        evaluator.inspect(mockClasses, studentInfo, null);
         assertTrue(Files.exists(reportPath));
 
         String reportContent = Files.readString(reportPath);

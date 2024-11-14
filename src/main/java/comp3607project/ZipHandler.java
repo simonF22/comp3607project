@@ -78,7 +78,7 @@ public class ZipHandler {
         }
     }
 
-    // Method to append package declaration to Java files
+    // Method to append package declaration to Java files so they can be retrieved
     public void appendPackageToJavaFiles(Path studentDirectory) {
         File dir = new File(studentDirectory.toString());
         String[] extensions = new String[] { "java" };

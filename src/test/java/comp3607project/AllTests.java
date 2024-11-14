@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
     ZipHandlerTest.class,
     JavaEvaluatorTest.class,
     ScoreCalculatorTest.class,
-    ReportGeneratorTest.class,
+    PDFGeneratorTest.class,
     ChatBotStrategyTest.class,
     ChatBotPlatformStrategyTest.class,
     ChatBotGeneratorStrategyTest.class

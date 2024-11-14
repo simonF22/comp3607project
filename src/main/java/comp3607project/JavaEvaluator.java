@@ -17,12 +17,8 @@ public class JavaEvaluator {
     private EvaluationStrategy chatBotPlatformStrategy;
     private EvaluationStrategy chatBotGeneratorStrategy;
 
-    //private List<EvaluationStrategy> strategies = new ArrayList<>();
-
     @SuppressWarnings("FieldMayBeFinal")
     private List<EvaluationObserver> observers = new ArrayList<>();
-    @SuppressWarnings("FieldMayBeFinal")
-    private ReportGenerator reportGenerator = new ReportGenerator();
     @SuppressWarnings("FieldMayBeFinal")
     private ScoreCalculator scoreCalculator = new ScoreCalculator();
     private PDFGenerator pdfGenerator = new PDFGenerator();
@@ -97,11 +93,11 @@ public class JavaEvaluator {
         }
     }
 
-    public void inspect(List<Class<?>> classInstances, String studentID, Path subDirectory) {
+    public void inspect(List<Class<?>> classInstances, String[] studentInfo, Path subDirectory) {
  
         for (Class<?> clazz : classInstances) {
             int totalScore = 0;
-            notifyObserversOnStart(clazz.getName());
+            notifyObserversOnStart(clazz.getSimpleName());
 
             if (clazz.getName() == "ChatBot"){
                 chatBotStrategy.evaluate(clazz, tests, feedback);
@@ -121,22 +117,19 @@ public class JavaEvaluator {
                 feedback = chatBotGeneratorStrategy.getFeedback();
             }
 
-            notifyObserversOnComplete(clazz.getName());
+            notifyObserversOnComplete(clazz.getSimpleName());
         }
 
-        int finalScore = scoreCalculator.calculateScore(tests);
-        System.out.println(finalScore);
-        //reportGenerator.generateReport(studentID, tests, feedback, "", Path.of("src", "main", "java", "comp3607project", "Reports", "Report_" + studentID + ".txt"));
-        //reportGenerator.generateReport(studentID, tests, feedback, "", subDirectory.resolve("Report_" + studentID + ".txt"));
-        pdfGenerator.generateReport(studentID, tests, feedback, "", subDirectory.resolve("Report_" + studentID + ".pdf"));
+        int totalScore = scoreCalculator.calculateScore(tests);
+        pdfGenerator.generateReport(studentInfo, totalScore, tests, feedback, "", subDirectory.resolve("Report.pdf"));
     }
 
     public List<EvaluationObserver> getObservers() {
         return observers;
     }
 
-    public ReportGenerator getReportGenerator() {
-        return reportGenerator;
+    public PDFGenerator getReportGenerator() {
+        return pdfGenerator;
     }
 
     public ScoreCalculator getScoreCalculator() {
