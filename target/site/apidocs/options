@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/User/.m2/repository/org/apache/pdfbox/pdfbox/3.0.0/pdfbox-3.0.0.jar;C:/Users/User/.m2/repository/org/apache/pdfbox/pdfbox-io/3.0.0/pdfbox-io-3.0.0.jar;C:/Users/User/.m2/repository/org/apache/pdfbox/fontbox/3.0.0/fontbox-3.0.0.jar;C:/Users/User/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar;C:/Users/User/.m2/repository/e-iceblue/spire.pdf/9.10.3/spire.pdf-9.10.3.jar;C:/Users/User/.m2/repository/commons-io/commons-io/2.17.0/commons-io-2.17.0.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/User/Downloads/comp3607project-main/comp3607project-main/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/User/Downloads/comp3607project-main/comp3607project-main/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'comp3607project 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'comp3607project 1.0-SNAPSHOT API'
