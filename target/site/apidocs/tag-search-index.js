@@ -1,0 +1,1 @@
+tagSearchIndex = [{"l":"Usage Example","h":"class comp3607project.ConsoleLoggerObserver","d":"Section","u":"comp3607project/ConsoleLoggerObserver.html#usage-example-heading"}];updateSearchResults();
